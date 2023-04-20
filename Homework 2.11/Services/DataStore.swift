@@ -5,7 +5,7 @@
 //  Created by Iaroslav Beldin on 19.04.2023.
 //
 
-struct DataStore {
+final class DataStore {
     let firstNames = [
         "Aiden",
         "Zoe",
@@ -18,7 +18,7 @@ struct DataStore {
         "Lucas",
         "Sadie"
     ]
-
+    
     let lastNames = [
         "Wolf",
         "Fox",
@@ -31,7 +31,7 @@ struct DataStore {
         "Kangaroo",
         "Panda"
     ]
-
+    
     let phoneNumbers = [
         "+1 (906) 436-77-90",
         "+44 (960) 587-89-01",
@@ -44,7 +44,7 @@ struct DataStore {
         "+65 (777) 214-56-28",
         "+61 (012) 385-37-39"
     ]
-
+    
     let emails = [
         "bluewolf@mail.com",
         "silverfox@gmail.com",

@@ -15,26 +15,29 @@ struct Person {
         "\(firstName) \(lastName)"
     }
     
-    static let dataStore = DataStore()
-    
     static func getPersons() -> [Person]{
-        var firstNames = dataStore.firstNames.shuffled()
-        var lastNames = dataStore.lastNames.shuffled()
-        var phoneNumbers = dataStore.phoneNumbers.shuffled()
-        var emails = dataStore.emails.shuffled()
+        let dataStore = DataStore()
+        
+        let firstNames = dataStore.firstNames.shuffled()
+        let lastNames = dataStore.lastNames.shuffled()
+        let phoneNumbers = dataStore.phoneNumbers.shuffled()
+        let emails = dataStore.emails.shuffled()
+        
+        let minElements = [
+            firstNames.count,
+            lastNames.count,
+            phoneNumbers.count,
+            emails.count
+        ].min() ?? 0
         
         var persons = [Person]()
         
-        while !firstNames.isEmpty,
-              !lastNames.isEmpty,
-              !phoneNumbers.isEmpty,
-              !emails.isEmpty {
-            
+        for element in 0..<minElements {
             let newPerson = Person(
-                firstName: firstNames.removeLast(),
-                lastName: lastNames.removeLast(),
-                phoneNumber: phoneNumbers.removeLast(),
-                email: emails.removeLast()
+                firstName: firstNames[element],
+                lastName: lastNames[element],
+                phoneNumber: phoneNumbers[element],
+                email: emails[element]
             )
             
             persons.append(newPerson)
