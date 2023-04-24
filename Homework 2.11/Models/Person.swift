@@ -6,6 +6,7 @@
 //
 
 struct Person {
+    
     let firstName: String
     let lastName: String
     let phoneNumber: String
@@ -15,34 +16,42 @@ struct Person {
         "\(firstName) \(lastName)"
     }
     
+    var rows: [String] {
+        [phoneNumber, email]
+    }
+    
     static func getPersons() -> [Person]{
-        let dataStore = DataStore()
         
-        let firstNames = dataStore.firstNames.shuffled()
-        let lastNames = dataStore.lastNames.shuffled()
-        let phoneNumbers = dataStore.phoneNumbers.shuffled()
-        let emails = dataStore.emails.shuffled()
+        var persons: [Person] = []
         
-        let minElements = [
+        let firstNames = DataStore.shared.firstNames.shuffled()
+        let lastNames = DataStore.shared.lastNames.shuffled()
+        let phoneNumbers = DataStore.shared.phoneNumbers.shuffled()
+        let emails = DataStore.shared.emails.shuffled()
+        
+        let iterationCount = min(
             firstNames.count,
             lastNames.count,
             phoneNumbers.count,
             emails.count
-        ].min() ?? 0
+        )
         
-        var persons = [Person]()
-        
-        for element in 0..<minElements {
-            let newPerson = Person(
-                firstName: firstNames[element],
-                lastName: lastNames[element],
-                phoneNumber: phoneNumbers[element],
-                email: emails[element]
+        for index in 0..<iterationCount {
+            let person = Person(
+                firstName: firstNames[index],
+                lastName: lastNames[index],
+                phoneNumber: phoneNumbers[index],
+                email: emails[index]
             )
             
-            persons.append(newPerson)
+            persons.append(person)
         }
         
         return persons
     }
+}
+
+enum Contacts: String {
+    case phone = "phone"
+    case email = "tray"
 }

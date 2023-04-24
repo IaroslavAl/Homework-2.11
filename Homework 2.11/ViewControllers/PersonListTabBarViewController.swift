@@ -11,14 +11,15 @@ final class PersonListTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let personList = Person.getPersons()
+        setupViewControllers()
+    }
+    
+    private func setupViewControllers() {
+        guard let personListVC = viewControllers?.first as? PersonListViewController else { return }
+        guard let personListMoreInfoVC = viewControllers?.last as? PersonListMoreInfoViewController else { return }
         
-        viewControllers?.compactMap({ $0 as? UINavigationController }).forEach { navigationVC in
-            if let personListVC = navigationVC.topViewController as? PersonListViewController {
-                personListVC.personList = personList
-            } else if let personListMoreInfoVC = navigationVC.topViewController as? PersonListMoreInfoViewController {
-                personListMoreInfoVC.personList = personList
-            }
-        }
+        let persons = Person.getPersons()
+        personListVC.persons = persons
+        personListMoreInfoVC.persons = persons
     }
 }
